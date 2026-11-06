@@ -5,169 +5,246 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel Interativo de Falhas (Relés)</title>
     <style>
+        :root {
+            --bg-color: #0f172a;
+            --panel-bg: #1e293b;
+            --card-bg: #ffffff;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-color: #38bdf8;
+            --danger-color: #ef4444;
+            --success-color: #22c55e;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f6f9;
-            color: #333;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 30px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
-            margin: 0;
             min-height: 100vh;
         }
-        h1 { color: #2c3e50; margin-bottom: 5px; text-align: center; }
-        p { color: #7f8c8d; margin-bottom: 25px; text-align: center; }
 
-        /* Container Principal que divide os controles e a personagem */
-        .main-layout {
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 { 
+            color: var(--text-main); 
+            margin: 0 0 8px 0; 
+            font-size: 1.8rem;
+            letter-spacing: 0.5px;
+        }
+
+        p { 
+            color: var(--text-muted); 
+            margin: 0; 
+            font-size: 0.95rem;
+        }
+
+        /* Layout Principal: Lado a Lado (Personagem + Controles) */
+        .dashboard-container {
             display: flex;
-            flex-wrap: wrap;
             gap: 30px;
-            justify-content: center;
-            align-items: flex-start;
+            max-width: 1100px;
             width: 100%;
-            max-width: 1200px;
+            align-items: stretch;
+            justify-content: center;
         }
 
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            flex: 1;
-            min-width: 300px;
-        }
-
-        /* Card Moderno da Personagem */
-        .character-card {
-            background: linear-gradient(135deg, #2c3e50, #1a252f);
+        /* Painel da Personagem (Rei Ayanami) */
+        .character-panel {
+            background: var(--panel-bg);
             border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            overflow: hidden;
             width: 280px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
             display: flex;
             flex-direction: column;
-            align-items: center;
-            text-align: center;
-            border-top: 4px solid #3498db;
-            color: white;
+            overflow: hidden;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            flex-shrink: 0;
         }
 
-        .character-image-container {
+        .character-image-box {
             width: 100%;
-            height: 340px;
-            overflow: hidden;
+            height: 320px;
+            overflow: position;
             position: relative;
         }
 
-        .character-image-container img {
+        .character-image-box img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: top center;
+            object-position: center top;
             transition: transform 0.5s ease;
         }
 
-        .character-card:hover .character-image-container img {
-            transform: scale(1.05);
+        .character-panel:hover .character-image-box img {
+            transform: scale(1.03);
         }
 
-        .character-info {
+        .character-details {
             padding: 20px;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(30,41,59,0.8), #1e293b);
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        .character-info h3 {
-            margin: 0 0 8px 0;
-            font-size: 1.2rem;
-            color: #ecf0f1;
+        .character-details h3 {
+            margin: 0 0 5px 0;
+            color: var(--accent-color);
+            font-size: 1.1rem;
             letter-spacing: 1px;
         }
 
-        .character-info p {
-            margin: 0;
-            font-size: 0.85rem;
-            color: #bdc3c7;
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 5px;
         }
 
-        /* Cards dos Relés */
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--success-color);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--success-color);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+
+        /* Grid dos Relés */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(200px, 1fr));
+            gap: 16px;
+            flex-grow: 1;
+        }
+
+        /* Card Individual do Relé */
         .card {
-            background: white;
-            padding: 25px;
+            background: var(--card-bg);
+            padding: 20px;
             border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
-            border-top: 4px solid #34495e;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.3s ease;
+            border-left: 4px solid #cbd5e1;
         }
-        .card:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+
+        .card.active {
+            border-left-color: var(--danger-color);
+            background: #fff5f5;
         }
-        .card h3 { margin: 0 0 20px 0; color: #2c3e50; font-size: 1rem; }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+
+        .card h3 { 
+            margin: 0 0 15px 0; 
+            color: #334155; 
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-align: center;
+        }
         
         /* Custom Toggle Switch */
         .switch {
             position: relative;
             display: inline-block;
-            width: 60px;
-            height: 34px;
+            width: 56px;
+            height: 30px;
         }
+
         .switch input { opacity: 0; width: 0; height: 0; }
+
         .slider {
             position: absolute;
             cursor: pointer;
             top: 0; left: 0; right: 0; bottom: 0;
-            background-color: #bdc3c7;
+            background-color: #cbd5e1;
             transition: .3s;
-            border-radius: 34px;
+            border-radius: 30px;
         }
+
         .slider:before {
             position: absolute;
             content: "";
-            height: 26px; width: 26px;
+            height: 22px; width: 22px;
             left: 4px; bottom: 4px;
             background-color: white;
             transition: .3s;
             border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
-        input:checked + .slider { background-color: #e74c3c; } 
+
+        input:checked + .slider { background-color: var(--danger-color); } 
         input:checked + .slider:before { transform: translateX(26px); }
 
-        /* Responsividade para telas menores */
-        @media (max-width: 768px) {
-            .main-layout {
+        /* Responsividade para celulares */
+        @media (max-width: 850px) {
+            .dashboard-container {
                 flex-direction: column;
                 align-items: center;
             }
-            .character-card {
+            .character-panel {
                 width: 100%;
-                max-width: 350px;
+                max-width: 400px;
+            }
+            .grid-container {
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+                width: 100%;
             }
         }
     </style>
 </head>
 <body>
 
-    <h1>Painel de Controle de Falhas</h1>
-    <p>Ativação e Desativação de Relés em Tempo Real</p>
+    <header>
+        <h1>Painel de Controle de Falhas</h1>
+        <p>Ativação e Desativação de Relés em Tempo Real</p>
+    </header>
 
-    <div class="main-layout">
-        <!-- Container onde os relés são injetados via JavaScript -->
-        <div class="grid-container" id="painel-reles"></div>
-
-        <!-- Painel Lateral Moderno com a Rei Ayanami -->
-        <div class="character-card">
-            <div class="character-image-container">
-                <!-- Imagem temática de alta qualidade da Rei Ayanami -->
-                <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=600&auto=format&fit=crop" alt="Rei Ayanami Aesthetic">
+    <div class="dashboard-container">
+        <!-- Painel Lateral da Personagem -->
+        <div class="character-panel">
+            <div class="character-image-box">
+                <!-- Substitua o link abaixo pela imagem desejada da Rei Ayanami -->
+                <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=600&auto=format&fit=crop" alt="Rei Ayanami">
             </div>
-            <div class="character-info">
+            <div class="character-details">
                 <h3>REI AYANAMI</h3>
-                <p>System Status: Online</p>
+                <div class="status-indicator">
+                    <span class="status-dot"></span> Sincronia Estável
+                </div>
             </div>
+        </div>
+
+        <!-- Grid de Relés -->
+        <div class="grid-container" id="painel-reles">
+            <!-- Os botões serão injetados aqui via JavaScript -->
         </div>
     </div>
 
@@ -176,13 +253,14 @@
         const container = document.getElementById('painel-reles');
         const totalReles = 8;
 
-        // Cria os botões na tela automaticamente
+        // Cria os cards e relés na tela automaticamente
         for (let i = 1; i <= totalReles; i++) {
             const defectKey = `DEFEITO${i}`;
             const card = document.createElement('div');
             card.className = 'card';
+            card.id = `card-${defectKey}`;
             card.innerHTML = `
-                <h3>Relé ${i} (${defectKey})</h3>
+                <h3>Relé ${i} <br><small style="color:#64748b; font-weight:normal;">(${defectKey})</small></h3>
                 <label class="switch">
                     <input type="checkbox" id="${defectKey}" onchange="atualizarFirebase('${defectKey}', this.checked)">
                     <span class="slider"></span>
@@ -191,8 +269,21 @@
             container.appendChild(card);
         }
 
+        // Atualiza a interface visual do card (borda vermelha se ativo)
+        function atualizarCardUI(chave, status) {
+            const cardElement = document.getElementById(`card-${chave}`);
+            if (cardElement) {
+                if (status) {
+                    cardElement.classList.add('active');
+                } else {
+                    cardElement.classList.remove('active');
+                }
+            }
+        }
+
         // Envia o estado atualizado via requisição HTTP PUT
         function atualizarFirebase(chave, status) {
+            atualizarCardUI(chave, status);
             fetch(`${databaseURL}/${chave}.json`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
@@ -206,7 +297,7 @@
             .catch(error => console.error("Erro ao enviar comando:", error));
         }
 
-        // Busca todos os estados de uma vez só na raiz do banco de dados
+        // Busca todos os estados do Firebase e sincroniza os inputs e cores
         function buscarEstadosIniciais() {
             fetch(`${databaseURL}/.json`)
                 .then(res => {
@@ -220,7 +311,9 @@
                         const checkbox = document.getElementById(defectKey);
                         if (checkbox && dados[defectKey] !== undefined) {
                             const valor = dados[defectKey];
-                            checkbox.checked = (valor === true || valor === 1 || valor === "true");
+                            const estadoBooleano = (valor === true || valor === 1 || valor === "true");
+                            checkbox.checked = estadoBooleano;
+                            atualizarCardUI(defectKey, estadoBooleano);
                         }
                     }
                 })
