@@ -4,21 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel de Controle - Rei Ayanami</title>
-    <!-- Importando fontes: Serif estilo Evangelion (Cinzel/Playfair) + Orbitron + Inter -->
+    <!-- Importando fontes: Cinzel (estilo Evangelion) + Orbitron + Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@300;400;500;600&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --primary-glow: #38bdf8;
             --danger-glow: #f43f5e;
-            --bg-deep: #030712;
-            --card-bg: rgba(15, 23, 42, 0.75);
-            --card-border: rgba(56, 189, 248, 0.15);
+            --card-bg: rgba(15, 23, 42, 0.8);
+            --card-border: rgba(56, 189, 248, 0.2);
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, rgba(3, 7, 18, 0.85), rgba(15, 23, 42, 0.92)), 
+            background: linear-gradient(135deg, rgba(3, 7, 18, 0.9), rgba(15, 23, 42, 0.95)), 
                         url('https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=1600&auto=format&fit=crop') no-repeat center center fixed;
             background-size: cover;
             color: #f8fafc;
@@ -35,12 +34,12 @@
             margin-bottom: 35px;
         }
 
-        /* Título com a fonte clássica de Evangelion (Serifa pesada e marcante) */
+        /* Título com a fonte clássica de Evangelion (Cinzel / Serifa pesada) */
         h1 { 
             font-family: 'Cinzel', serif;
             color: #ffffff; 
             margin: 0 0 10px 0; 
-            font-size: 2.6rem;
+            font-size: 2.5rem;
             letter-spacing: 3px;
             text-transform: uppercase;
             font-weight: 900;
@@ -66,12 +65,12 @@
 
         /* Painel Lateral da Personagem */
         .character-panel {
-            background: rgba(11, 19, 38, 0.85);
+            background: rgba(11, 19, 38, 0.9);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border-radius: 20px;
             width: 300px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(56, 189, 248, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(56, 189, 248, 0.15);
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -84,6 +83,7 @@
             height: 380px;
             position: relative;
             overflow: hidden;
+            background-color: #050b14;
         }
 
         .character-image-box img {
@@ -101,7 +101,7 @@
         .character-details {
             padding: 24px;
             text-align: center;
-            background: linear-gradient(to bottom, rgba(11,19,38,0.4), rgba(11,19,38,0.98));
+            background: linear-gradient(to bottom, rgba(11,19,38,0.5), rgba(11,19,38,0.98));
             flex-grow: 1;
             display: flex;
             flex-direction: column;
@@ -263,11 +263,10 @@
     </header>
 
     <div class="dashboard-container">
-        <!-- Painel Lateral com a Rei Ayanami oficial e a lua -->
+        <!-- Painel Lateral com a Rei Ayanami e a lua garantida -->
         <div class="character-panel">
             <div class="character-image-box">
-                <!-- Imagem correta da Rei Ayanami com atmosfera temática -->
-                <img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=800&auto=format&fit=crop" alt="Rei Ayanami">
+                <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=800&auto=format&fit=crop" alt="Rei Ayanami">
             </div>
             <div class="character-details">
                 <h3>REI AYANAMI</h3>
