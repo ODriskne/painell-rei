@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel de Controle - Rei Ayanami</title>
-    <!-- Importando fontes modernas e futuristas do Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    <!-- Importando fontes: Serif estilo Evangelion (Cinzel/Playfair) + Orbitron + Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@300;400;500;600&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -18,7 +18,6 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            /* Fundo atmosférico escuro imersivo com a lua/estética espacial */
             background: linear-gradient(135deg, rgba(3, 7, 18, 0.85), rgba(15, 23, 42, 0.92)), 
                         url('https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=1600&auto=format&fit=crop') no-repeat center center fixed;
             background-size: cover;
@@ -36,14 +35,16 @@
             margin-bottom: 35px;
         }
 
+        /* Título com a fonte clássica de Evangelion (Serifa pesada e marcante) */
         h1 { 
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Cinzel', serif;
             color: #ffffff; 
             margin: 0 0 10px 0; 
-            font-size: 2.2rem;
-            letter-spacing: 2px;
+            font-size: 2.6rem;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            text-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+            font-weight: 900;
+            text-shadow: 0 0 20px rgba(244, 63, 94, 0.4), 0 0 10px rgba(56, 189, 248, 0.4);
         }
 
         p { 
@@ -63,74 +64,6 @@
             justify-content: center;
         }
 
-        /* Painel Lateral da Personagem (Glassmorphism Avançado) */
+        /* Painel Lateral da Personagem */
         .character-panel {
-            background: rgba(11, 19, 38, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-radius: 20px;
-            width: 300px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(56, 189, 248, 0.1);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            border: 1px solid var(--card-border);
-            flex-shrink: 0;
-        }
-
-        .character-image-box {
-            width: 100%;
-            height: 380px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .character-image-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center top;
-            transition: transform 0.6s ease;
-        }
-
-        .character-panel:hover .character-image-box img {
-            transform: scale(1.05);
-        }
-
-        .character-details {
-            padding: 24px;
-            text-align: center;
-            background: linear-gradient(to bottom, rgba(11,19,38,0.4), rgba(11,19,38,0.98));
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .character-details h3 {
-            font-family: 'Orbitron', sans-serif;
-            margin: 0 0 10px 0;
-            color: var(--primary-glow);
-            font-size: 1.15rem;
-            letter-spacing: 3px;
-            text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
-        }
-
-        .status-indicator {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            font-size: 0.85rem;
-            color: #cbd5e1;
-            font-weight: 500;
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background-color: #22c55e;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #22c55e;
-            animation: pulse 2s infinite;
-        }
+            background: rgba(11, 19, 38,
