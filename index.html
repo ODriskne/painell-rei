@@ -3,24 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel Interativo de Falhas (Relés) - Rei Ayanami</title>
+    <title>Painel de Controle - Rei Ayanami</title>
+    <!-- Importando fontes modernas e futuristas do Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --primary-glow: #00f0ff;
-            --danger-glow: #ff3366;
+            --primary-glow: #38bdf8;
+            --danger-glow: #f43f5e;
+            --bg-deep: #030712;
             --card-bg: rgba(15, 23, 42, 0.75);
-            --card-border: rgba(0, 240, 255, 0.2);
+            --card-border: rgba(56, 189, 248, 0.15);
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            /* Fundo atmosférico com a Rei Ayanami e a Lua Gigante */
-            background: linear-gradient(rgba(5, 10, 25, 0.8), rgba(10, 15, 30, 0.9)), 
-                        url('https://images.unsplash.com/photo-1532693322450-2cb5c511067d?q=80&w=1600&auto=format&fit=crop') no-repeat center center fixed;
+            font-family: 'Inter', sans-serif;
+            /* Fundo atmosférico escuro imersivo com a lua/estética espacial */
+            background: linear-gradient(135deg, rgba(3, 7, 18, 0.85), rgba(15, 23, 42, 0.92)), 
+                        url('https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=1600&auto=format&fit=crop') no-repeat center center fixed;
             background-size: cover;
             color: #f8fafc;
             margin: 0;
-            padding: 30px 20px;
+            padding: 40px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -29,22 +33,24 @@
 
         header {
             text-align: center;
-            margin-bottom: 30px;
-            text-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+            margin-bottom: 35px;
         }
 
         h1 { 
+            font-family: 'Orbitron', sans-serif;
             color: #ffffff; 
-            margin: 0 0 8px 0; 
-            font-size: 2rem;
-            letter-spacing: 1px;
-            font-weight: 700;
+            margin: 0 0 10px 0; 
+            font-size: 2.2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
         }
 
         p { 
             color: #94a3b8; 
             margin: 0; 
             font-size: 1rem;
+            letter-spacing: 0.5px;
         }
 
         /* Layout Principal */
@@ -57,14 +63,14 @@
             justify-content: center;
         }
 
-        /* Painel Lateral da Personagem com Efeito de Vidro (Glassmorphism) */
+        /* Painel Lateral da Personagem (Glassmorphism Avançado) */
         .character-panel {
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 16px;
+            background: rgba(11, 19, 38, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 20px;
             width: 300px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 240, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(56, 189, 248, 0.1);
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -74,7 +80,7 @@
 
         .character-image-box {
             width: 100%;
-            height: 360px;
+            height: 380px;
             position: relative;
             overflow: hidden;
         }
@@ -92,9 +98,9 @@
         }
 
         .character-details {
-            padding: 22px;
+            padding: 24px;
             text-align: center;
-            background: linear-gradient(to bottom, rgba(15,23,42,0.6), rgba(15,23,42,0.95));
+            background: linear-gradient(to bottom, rgba(11,19,38,0.4), rgba(11,19,38,0.98));
             flex-grow: 1;
             display: flex;
             flex-direction: column;
@@ -102,11 +108,12 @@
         }
 
         .character-details h3 {
-            margin: 0 0 8px 0;
+            font-family: 'Orbitron', sans-serif;
+            margin: 0 0 10px 0;
             color: var(--primary-glow);
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-            text-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
+            font-size: 1.15rem;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
         }
 
         .status-indicator {
@@ -116,6 +123,7 @@
             gap: 8px;
             font-size: 0.85rem;
             color: #cbd5e1;
+            font-weight: 500;
         }
 
         .status-dot {
@@ -126,222 +134,3 @@
             box-shadow: 0 0 10px #22c55e;
             animation: pulse 2s infinite;
         }
-
-        @keyframes pulse {
-            0% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(0.9); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-
-        /* Grid dos Relés */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(220px, 1fr));
-            gap: 20px;
-            flex-grow: 1;
-        }
-
-        /* Cards dos Relés com Estilo Glassmorphism */
-        .card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            padding: 22px;
-            border-radius: 14px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-left: 4px solid #64748b;
-        }
-
-        .card.active {
-            border-left-color: var(--danger-glow);
-            background: rgba(45, 15, 25, 0.8);
-            box-shadow: 0 0 20px rgba(255, 51, 102, 0.25);
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(0, 240, 255, 0.4);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 10px rgba(0, 240, 255, 0.2);
-        }
-
-        .card h3 { 
-            margin: 0 0 15px 0; 
-            color: #f1f5f9; 
-            font-size: 1rem;
-            font-weight: 600;
-            text-align: center;
-        }
-
-        .card h3 small {
-            color: #94a3b8;
-            font-size: 0.8rem;
-            display: block;
-            margin-top: 3px;
-        }
-        
-        /* Custom Toggle Switch */
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 58px;
-            height: 32px;
-        }
-
-        .switch input { opacity: 0; width: 0; height: 0; }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: #334155;
-            transition: .3s;
-            border-radius: 32px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 24px; width: 24px;
-            left: 3px; bottom: 3px;
-            background-color: #ffffff;
-            transition: .3s;
-            border-radius: 50%;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-        }
-
-        input:checked + .slider { 
-            background-color: var(--danger-glow); 
-            box-shadow: 0 0 10px var(--danger-glow);
-        } 
-        input:checked + .slider:before { transform: translateX(26px); }
-
-        /* Responsividade para celulares */
-        @media (max-width: 900px) {
-            .dashboard-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            .character-panel {
-                width: 100%;
-                max-width: 440px;
-            }
-            .grid-container {
-                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-                width: 100%;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <header>
-        <h1>Painel de Controle de Falhas</h1>
-        <p>Ativação e Desativação de Relés em Tempo Real</p>
-    </header>
-
-    <div class="dashboard-container">
-        <!-- Painel Lateral com a Rei Ayanami e a Lua ao Fundo -->
-        <div class="character-panel">
-            <div class="character-image-box">
-                <!-- Substitua o link abaixo se preferir outra imagem específica da Rei com a lua -->
-                <img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=800&auto=format&fit=crop" alt="Rei Ayanami - Moon Aesthetic">
-            </div>
-            <div class="character-details">
-                <h3>REI AYANAMI</h3>
-                <div class="status-indicator">
-                    <span class="status-dot"></span> Sincronia Estável
-                </div>
-            </div>
-        </div>
-
-        <!-- Grid de Relés -->
-        <div class="grid-container" id="painel-reles">
-            <!-- Os cards são injetados aqui via JavaScript -->
-        </div>
-    </div>
-
-    <script>
-        const databaseURL = "https://painel-wi-fi-default-rtdb.firebaseio.com";
-        const container = document.getElementById('painel-reles');
-        const totalReles = 8;
-
-        // Cria os cards automaticamente
-        for (let i = 1; i <= totalReles; i++) {
-            const defectKey = `DEFEITO${i}`;
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.id = `card-${defectKey}`;
-            card.innerHTML = `
-                <h3>Relé ${i} <small>(${defectKey})</small></h3>
-                <label class="switch">
-                    <input type="checkbox" id="${defectKey}" onchange="atualizarFirebase('${defectKey}', this.checked)">
-                    <span class="slider"></span>
-                </label>
-            `;
-            container.appendChild(card);
-        }
-
-        // Atualiza a interface visual do card (glow vermelho se ativo)
-        function atualizarCardUI(chave, status) {
-            const cardElement = document.getElementById(`card-${chave}`);
-            if (cardElement) {
-                if (status) {
-                    cardElement.classList.add('active');
-                } else {
-                    cardElement.classList.remove('active');
-                }
-            }
-        }
-
-        // Envia o estado atualizado via requisição HTTP PUT
-        function atualizarFirebase(chave, status) {
-            atualizarCardUI(chave, status);
-            fetch(`${databaseURL}/${chave}.json`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(status)
-            })
-            .then(res => {
-                if (!res.ok) throw new Error("Erro na resposta do servidor");
-                return res.json();
-            })
-            .then(data => console.log(`Atualizado ${chave}:`, data))
-            .catch(error => console.error("Erro ao enviar comando:", error));
-        }
-
-        // Busca todos os estados do Firebase e sincroniza a interface
-        function buscarEstadosIniciais() {
-            fetch(`${databaseURL}/.json`)
-                .then(res => {
-                    if (!res.ok) throw new Error("Erro ao conectar com o Firebase");
-                    return res.json();
-                })
-                .then(dados => {
-                    if (!dados) return;
-                    for (let i = 1; i <= totalReles; i++) {
-                        const defectKey = `DEFEITO${i}`;
-                        const checkbox = document.getElementById(defectKey);
-                        if (checkbox && dados[defectKey] !== undefined) {
-                            const valor = dados[defectKey];
-                            const estadoBooleano = (valor === true || valor === 1 || valor === "true");
-                            checkbox.checked = estadoBooleano;
-                            atualizarCardUI(defectKey, estadoBooleano);
-                        }
-                    }
-                })
-                .catch(err => console.log("Aguardando resposta ou sem dados no Firebase..."));
-        }
-
-        // Sincroniza ao abrir e repete a cada 3 segundos
-        buscarEstadosIniciais();
-        setInterval(buscarEstadosIniciais, 3000);
-    </script>
-</body>
-</html>
